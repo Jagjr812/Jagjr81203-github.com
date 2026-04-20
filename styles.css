@@ -119,3 +119,65 @@ section {
 h1 {
     color: var(--red);
 }
+
+/* =========================
+   Image Slider
+========================= */
+
+.slider {
+    position: relative;
+    max-width: 800px;
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+}
+
+.slide {
+    width: 100%;
+    display: none;
+    border-radius: 10px;
+}
+
+/* Active slide */
+.slide.active {
+    display: block;
+}
+
+/* Buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev:hover, .next:hover {
+    background-color: var(--gold);
+    color: var(--red);
+}
+
+/* Responsive Slider */
+@media screen and (max-width: 768px) {
+    .slider {
+        max-width: 95%;
+    }
+}
