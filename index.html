@@ -16,7 +16,6 @@
 
         <ul class="nav-menu">
             <li><a href="#home">Home</a></li>
-
             <li><a href="#about">About</a></li>
 
             <li class="dropdown">
@@ -34,11 +33,30 @@
         </ul>
     </nav>
 
-    <!-- Page Content Placeholder -->
+    <!-- Home Section -->
     <section id="home">
         <h1>Welcome to Colonial</h1>
         <p>Experience authentic Spanish cuisine with modern online ordering.</p>
+
+        <!-- Image Slider -->
+        <div class="slider">
+
+            <div class="slides">
+                <img class="slide" src="images/img1.jpg" alt="Food 1">
+                <img class="slide" src="images/img2.jpg" alt="Food 2">
+                <img class="slide" src="images/img3.jpg" alt="Food 3">
+                <img class="slide" src="images/img4.jpg" alt="Food 4">
+            </div>
+
+            <!-- Controls -->
+            <button class="prev" onclick="changeSlide(-1)">❮</button>
+            <button class="next" onclick="changeSlide(1)">❯</button>
+
+        </div>
     </section>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
 </html>
