@@ -788,7 +788,7 @@ h1 {
 }
 
 /* =========================
-   Responsive
+   Responsive Invoice
 ========================= */
 @media screen and (max-width: 900px) {
     .edit-panel      { position: static; flex: 1 1 100%; max-height: none; }
@@ -802,4 +802,197 @@ h1 {
     .inv-meta-row,
     .inv-bill-row,
     .inv-totals    { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* =========================
+   Mortgage Calculator Page
+========================= */
+.mort-hero {
+    text-align: center;
+    padding: 2.5rem 2rem 1rem;
+}
+
+.mort-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.mort-hero h1 {
+    color: var(--red);
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.mort-hero p {
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Main layout: instructions left, form right */
+.mort-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    max-width: 700px;
+    margin: 1.5rem auto 2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(139, 30, 30, 0.10);
+    background: #fff;
+}
+
+/* Instructions cell (left) */
+.mort-instructions {
+    flex: 1 1 220px;
+    background: #fff;
+    padding: 1.4rem 1.2rem;
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.7;
+    border-right: 1px solid #ddd;
+    font-family: Georgia, serif;
+}
+
+/* Form cell (right) */
+.mort-form-wrap {
+    flex: 1 1 260px;
+    padding: 1rem 1.2rem;
+    background: #fff;
+}
+
+/* The nested table — matches textbook exactly */
+.mort-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Georgia, serif;
+    font-size: 0.88rem;
+}
+
+.mort-table tr td {
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+
+.mort-row-alt td {
+    background: #f5f5f5;
+}
+
+.mort-label {
+    color: #333;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+/* Inputs inside the mortgage table */
+.mort-input {
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.88rem;
+    font-family: Georgia, serif;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+}
+
+.mort-input:focus {
+    border-color: var(--red);
+}
+
+.mort-input::placeholder {
+    color: #ccc;
+}
+
+/* Read-only output field */
+.mort-output {
+    background: #f0f4f0;
+    font-weight: bold;
+    color: var(--red);
+}
+
+/* Dropdown select */
+.mort-select {
+    width: 100%;
+    padding: 0.3rem 0.4rem;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    font-size: 0.88rem;
+    font-family: Georgia, serif;
+    color: #333;
+    background: #fff;
+    outline: none;
+    cursor: pointer;
+}
+
+.mort-select:focus {
+    border-color: var(--red);
+}
+
+/* Calculate and Reset buttons */
+.mort-btn {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.mort-btn-calc {
+    background: var(--red);
+    color: #fff;
+}
+
+.mort-btn-calc:hover {
+    background: var(--gold);
+    color: var(--red);
+    transform: translateY(-1px);
+}
+
+.mort-btn-reset {
+    background: #eee;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.mort-btn-reset:hover {
+    background: #ddd;
+    color: #333;
+}
+
+/* How it works note */
+.mort-note {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    padding: 1rem 1.4rem;
+    background: #fff8f0;
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.7;
+    font-family: Georgia, serif;
+}
+
+.mort-note strong {
+    color: var(--red);
+}
+
+.mort-note em {
+    font-style: italic;
+    color: #333;
+}
+
+/* Responsive mortgage */
+@media screen and (max-width: 600px) {
+    .mort-page          { flex-direction: column; }
+    .mort-instructions  { border-right: none; border-bottom: 1px solid #ddd; }
 }
