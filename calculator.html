@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPG Calculator – Colonial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Colonial</div>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li class="dropdown">
+                <a href="index.html#menu">Menu ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html#tapas">Tapas</a></li>
+                    <li><a href="index.html#entrees">Entrées</a></li>
+                    <li><a href="index.html#desserts">Desserts</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#order">Order Online</a></li>
+            <li><a href="index.html#cart">Cart</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="calculator.html">⛽ MPG Calc</a></li>
+        </ul>
+    </nav>
+
+    <div class="calc-hero">
+        <span class="calc-logo">⛽</span>
+        <h1>Miles Per Gallon Calculator</h1>
+        <p>Enter your trip details to find your fuel efficiency.</p>
+    </div>
+
+    <div class="calc-card">
+
+        <div class="debug-box">
+            <strong>🐛 Pseudocode — Bugs Found &amp; Fixed</strong>
+            Bug 1 &amp; 2 — Wrong operator &amp; variable name:<br>
+            &nbsp;&nbsp;<code class="strike">milesPerGallon = milesTraveled + gallonsOfGas</code><br>
+            &nbsp;&nbsp;<code class="fix">milesPerGallon = milesTraveled / gallonsOfGasUsed</code><br><br>
+            Bug 3 — Typo in output variable: <code class="strike">milsperGallon</code>
+            → <code class="fix">milesPerGallon</code><br>
+            Bug 4 — Pseudocode closes with <code class="strike">start</code>
+            → should be <code class="fix">stop</code>
+        </div>
+
+        <div class="field">
+            <label for="miles">
+                Miles Traveled
+                <span>(total distance driven on this tank)</span>
+            </label>
+            <input type="number" id="miles" min="0" step="any"
+                   placeholder="e.g. 320">
+        </div>
+
+        <div class="field">
+            <label for="gallons">
+                Gallons of Gas Used
+                <span>(total gallons filled — shown on the pump)</span>
+            </label>
+            <input type="number" id="gallons" min="0" step="any"
+                   placeholder="e.g. 12.5">
+        </div>
+
+        <button class="btn-calc" onclick="calculateMPG()">Calculate MPG</button>
+
+        <div class="result" id="result">
+            <div class="result-label">Your fuel efficiency</div>
+            <div class="result-value" id="result-value"></div>
+            <div class="result-desc"  id="result-desc"></div>
+        </div>
+
+        <div class="reset-wrap">
+            <button class="reset-btn" onclick="resetCalc()">Clear &amp; reset</button>
+        </div>
+
+    </div>
+
+    <div class="page-footer">
+        Colonial Spanish Restaurant &nbsp;·&nbsp;
+        JS Calculator Assignment &nbsp;·&nbsp;
+        Due Mar 28, 2026
+    </div>
+
+    <script>
+        /*
+         * Miles Per Gallon Calculator
+         *
+         * CORRECTED PSEUDOCODE:
+         *   start
+         *     input milesTraveled
+         *     input gallonsOfGasUsed
+         *     milesPerGallon = milesTraveled / gallonsOfGasUsed
+         *     output milesPerGallon
+         *   stop
+         *
+         * Reference: https://www.w3schools.com/js/js_functions.asp
+         */
+
+        function calculateMPG() {
+
+            // Step 1: Read inputs
+            var milesTraveled    = parseFloat(document.getElementById("miles").value);
+            var gallonsOfGasUsed = parseFloat(document.getElementById("gallons").value);
+
+            var resultBox   = document.getElementById("result");
+            var resultValue = document.getElementById("result-value");
+            var resultDesc  = document.getElementById("result-desc");
+
+            // Reset
+            resultBox.className   = "result";
+            resultValue.className = "result-value";
+
+            // Step 2: Validate
+            if (isNaN(milesTraveled)    || milesTraveled    <= 0 ||
+                isNaN(gallonsOfGasUsed) || gallonsOfGasUsed <= 0) {
+                resultValue.textContent = "Please enter values greater than zero.";
+                resultValue.className   = "result-value error-text";
+                resultDesc.textContent  = "";
+                resultBox.classList.add("show", "error");
+                return;
+            }
+
+            // Step 3: Calculate
+            var milesPerGallon = milesTraveled / gallonsOfGasUsed;
+
+            // Step 4: Output
+            resultValue.textContent = milesPerGallon.toFixed(2) + " MPG";
+            resultDesc.textContent  = getRating(milesPerGallon);
+            resultBox.classList.add("show");
+        }
+
+        function getRating(mpg) {
+            if (mpg >= 40) return "Excellent — very fuel-efficient vehicle.";
+            if (mpg >= 30) return "Good — above-average fuel economy.";
+            if (mpg >= 20) return "Average — typical for most vehicles.";
+            if (mpg >= 10) return "Below average — consider a tune-up.";
+            return "Very low efficiency — a mechanic inspection may help.";
+        }
+
+        function resetCalc() {
+            document.getElementById("miles").value   = "";
+            document.getElementById("gallons").value = "";
+            document.getElementById("result").className = "result";
+        }
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") calculateMPG();
+        });
+    </script>
+
+</body>
+</html>
