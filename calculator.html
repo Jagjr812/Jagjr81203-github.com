@@ -25,6 +25,7 @@
             <li><a href="index.html#cart">Cart</a></li>
             <li><a href="index.html#contact">Contact</a></li>
             <li><a href="calculator.html">⛽ MPG Calc</a></li>
+            <li><a href="invoice.html">🧾 Invoice</a></li>
         </ul>
     </nav>
 
@@ -101,8 +102,6 @@
          */
 
         function calculateMPG() {
-
-            // Step 1: Read inputs
             var milesTraveled    = parseFloat(document.getElementById("miles").value);
             var gallonsOfGasUsed = parseFloat(document.getElementById("gallons").value);
 
@@ -110,11 +109,9 @@
             var resultValue = document.getElementById("result-value");
             var resultDesc  = document.getElementById("result-desc");
 
-            // Reset
             resultBox.className   = "result";
             resultValue.className = "result-value";
 
-            // Step 2: Validate
             if (isNaN(milesTraveled)    || milesTraveled    <= 0 ||
                 isNaN(gallonsOfGasUsed) || gallonsOfGasUsed <= 0) {
                 resultValue.textContent = "Please enter values greater than zero.";
@@ -124,10 +121,8 @@
                 return;
             }
 
-            // Step 3: Calculate
             var milesPerGallon = milesTraveled / gallonsOfGasUsed;
 
-            // Step 4: Output
             resultValue.textContent = milesPerGallon.toFixed(2) + " MPG";
             resultDesc.textContent  = getRating(milesPerGallon);
             resultBox.classList.add("show");
