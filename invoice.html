@@ -31,22 +31,22 @@
 
     <div class="invoice-page">
 
-        <!-- LEFT: Invoice Document -->
+        <!-- ══════════════════════════════
+             LEFT: Live Invoice Document
+        ══════════════════════════════ -->
         <div class="invoice-doc">
 
             <!-- Header Banner -->
             <div class="inv-header">
-                <div class="inv-header-text">
-                    <h1 class="inv-company-name" id="companyNameDisplay">Company Name</h1>
-                    <p class="inv-company-meta" id="companyAddressDisplay">Address, City, ST, ZIP Code</p>
-                    <p class="inv-company-meta" id="companyPhoneDisplay">Phone Number | Fax Number</p>
-                </div>
+                <h1 class="inv-company-name" id="companyNameDisplay">Company Name</h1>
+                <p class="inv-company-meta" id="companyAddressDisplay">Address, City, ST, ZIP Code</p>
+                <p class="inv-company-meta" id="companyPhoneDisplay">Phone Number | Fax Number</p>
             </div>
 
             <!-- Invoice Number & Date -->
             <div class="inv-meta-row">
                 <h2 class="inv-number">Invoice # <span id="invoiceNumDisplay">100</span></h2>
-                <p class="inv-date">Date: <span id="invoiceDateDisplay">Enter Invoice Date</span></p>
+                <p class="inv-date">Date: <span id="invoiceDateDisplay">—</span></p>
             </div>
 
             <!-- Bill To / For -->
@@ -69,31 +69,23 @@
                     <tr>
                         <th>Item Description</th>
                         <th>Amount</th>
+                        <th class="col-del"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
-                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
-                    </tr>
-                    <tr class="inv-row-alt">
-                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
-                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
-                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
-                    </tr>
-                    <tr class="inv-row-alt">
-                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
-                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
-                    </tr>
+                <tbody id="itemsBody">
+                    <!-- Rows injected by JS -->
                 </tbody>
             </table>
+
+            <!-- Add Row Button -->
+            <div class="add-row-wrap">
+                <button class="btn-add-row" onclick="addRow()">+ Add Item</button>
+            </div>
 
             <!-- Totals -->
             <div class="inv-totals">
                 <div class="inv-totals-grid">
+
                     <span class="tot-label">Subtotal</span>
                     <span class="tot-value" id="subtotalDisplay">$0.00</span>
 
@@ -105,6 +97,9 @@
                         <span class="pct-sign">%</span>
                     </span>
 
+                    <span class="tot-label">Tax Amount</span>
+                    <span class="tot-value" id="taxAmountDisplay">$0.00</span>
+
                     <span class="tot-label">Other Costs</span>
                     <span class="tot-value">
                         <input type="number" id="otherCosts" class="tot-input"
@@ -114,10 +109,11 @@
 
                     <span class="tot-label total-label">Total Cost</span>
                     <span class="tot-value total-value" id="totalDisplay">$0.00</span>
+
                 </div>
             </div>
 
-            <!-- Footer -->
+            <!-- Invoice Footer -->
             <div class="inv-footer">
                 <p><em>Make all checks payable to <span id="payableDisplay">Company Name</span></em></p>
                 <p>If you have any questions concerning this invoice, use the following contact information:</p>
@@ -127,77 +123,218 @@
 
         </div><!-- end .invoice-doc -->
 
-        <!-- RIGHT: Fill-In Panel -->
+        <!-- ══════════════════════════════
+             RIGHT: Fill-In Panel
+        ══════════════════════════════ -->
         <div class="edit-panel">
             <h2 class="edit-title">✏️ Fill Invoice</h2>
 
+            <!-- Validation message -->
+            <div class="validation-msg" id="validationMsg"></div>
+
+            <!-- Company Info -->
             <div class="edit-section">
+                <p class="edit-section-label">Company Info</p>
+
                 <label>Company Name</label>
-                <input type="text" class="edit-input" placeholder="Your Company"
-                       oninput="document.getElementById('companyNameDisplay').textContent = this.value || 'Company Name';
-                                document.getElementById('payableDisplay').textContent = this.value || 'Company Name';">
+                <input type="text" class="edit-input" placeholder="Your Company" id="companyName"
+                       oninput="syncText('companyName','companyNameDisplay','Company Name');
+                                syncText('companyName','payableDisplay','Company Name');">
+
                 <label>Address</label>
-                <input type="text" class="edit-input" placeholder="123 Main St, City, ST 00000"
-                       oninput="document.getElementById('companyAddressDisplay').textContent = this.value || 'Address, City, ST, ZIP Code';">
+                <input type="text" class="edit-input" placeholder="123 Main St, City, ST 00000" id="companyAddress"
+                       oninput="syncText('companyAddress','companyAddressDisplay','Address, City, ST, ZIP Code');">
+
                 <label>Phone / Fax</label>
-                <input type="text" class="edit-input" placeholder="555-1234 | Fax 555-5678"
-                       oninput="document.getElementById('companyPhoneDisplay').textContent = this.value || 'Phone Number | Fax Number';">
+                <input type="text" class="edit-input" placeholder="555-1234 | Fax 555-5678" id="companyPhone"
+                       oninput="syncText('companyPhone','companyPhoneDisplay','Phone Number | Fax Number');">
             </div>
 
+            <!-- Invoice Details -->
             <div class="edit-section">
+                <p class="edit-section-label">Invoice Details</p>
+
                 <label>Invoice #</label>
-                <input type="text" class="edit-input" placeholder="100"
-                       oninput="document.getElementById('invoiceNumDisplay').textContent = this.value || '100';">
+                <input type="text" class="edit-input" placeholder="100" id="invoiceNum"
+                       oninput="syncText('invoiceNum','invoiceNumDisplay','100');">
+
                 <label>Invoice Date</label>
-                <input type="date" class="edit-input"
-                       oninput="document.getElementById('invoiceDateDisplay').textContent = this.value || 'Enter Invoice Date';">
+                <input type="date" class="edit-input" id="invoiceDate"
+                       oninput="syncDate();">
             </div>
 
+            <!-- Customer Info -->
             <div class="edit-section">
-                <label>Bill To — Name / Company</label>
-                <input type="text" class="edit-input" placeholder="Name | Company"
-                       oninput="document.getElementById('billNameDisplay').textContent = this.value || 'Name | Company';">
-                <label>Bill To — Address</label>
-                <input type="text" class="edit-input" placeholder="Address, City, ST, ZIP"
-                       oninput="document.getElementById('billAddressDisplay').textContent = this.value || 'Address, City, ST, ZIP Code';">
-                <label>Bill To — Phone</label>
-                <input type="text" class="edit-input" placeholder="555-0000"
-                       oninput="document.getElementById('billPhoneDisplay').textContent = this.value || 'Phone';">
-                <label>For (Product / Service)</label>
-                <input type="text" class="edit-input" placeholder="Product Description"
-                       oninput="document.getElementById('forDescDisplay').textContent = this.value || 'Product Description';">
+                <p class="edit-section-label">Customer Info</p>
+
+                <label>Customer Name / Company</label>
+                <input type="text" class="edit-input" placeholder="Name | Company" id="billName"
+                       oninput="syncText('billName','billNameDisplay','Name | Company');">
+
+                <label>Customer Address</label>
+                <input type="text" class="edit-input" placeholder="Address, City, ST, ZIP" id="billAddress"
+                       oninput="syncText('billAddress','billAddressDisplay','Address, City, ST, ZIP Code');">
+
+                <label>Customer Phone</label>
+                <input type="text" class="edit-input" placeholder="555-0000" id="billPhone"
+                       oninput="syncText('billPhone','billPhoneDisplay','Phone');">
+
+                <label>Product / Service Description</label>
+                <input type="text" class="edit-input" placeholder="Product Description" id="forDesc"
+                       oninput="syncText('forDesc','forDescDisplay','Product Description');">
             </div>
 
+            <!-- Contact -->
             <div class="edit-section">
-                <label>Contact Info (footer)</label>
-                <input type="text" class="edit-input" placeholder="Name, Phone, Email"
-                       oninput="document.getElementById('contactDisplay').textContent = this.value || 'Contact Name, Phone Number, Email';">
+                <p class="edit-section-label">Footer Contact</p>
+
+                <label>Contact Info</label>
+                <input type="text" class="edit-input" placeholder="Name, Phone, Email" id="contactInfo"
+                       oninput="syncText('contactInfo','contactDisplay','Contact Name, Phone Number, Email');">
             </div>
 
-            <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
-        </div>
+            <!-- Action Buttons -->
+            <button class="btn-print" onclick="printInvoice()">🖨️ Print / Save PDF</button>
+            <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
+
+        </div><!-- end .edit-panel -->
 
     </div><!-- end .invoice-page -->
 
     <div class="page-footer">
-        Colonial Spanish Restaurant &nbsp;·&nbsp; Invoice Form &nbsp;·&nbsp; Web Design Assignment
+        Colonial Spanish Restaurant &nbsp;·&nbsp; Invoice Form &nbsp;·&nbsp; Web Design Assignment — Due May 1, 2026
     </div>
 
     <script>
         /*
-         * Invoice Calculator
+         * ═══════════════════════════════════════════════════
+         *  INVOICE INTERACTIVE FORM  —  JavaScript
          *
-         * Variables:
+         *  Features:
+         *   1. Live sync: typing in the panel updates the invoice
+         *   2. Dynamic rows: add / remove item rows
+         *   3. Auto-calculate: subtotal, tax, other costs, total
+         *   4. Validation: amount fields accept numbers only
+         *   5. Default date set to today on page load
+         *   6. Clear All button resets everything
+         *   7. Print hides the panel for a clean PDF
+         *
+         *  Formula:
          *   subtotal  = sum of all item amounts
-         *   taxRate   = percentage entered by user
-         *   taxAmount = subtotal * (taxRate / 100)
-         *   otherCosts = additional flat costs
+         *   taxAmount = subtotal × (taxRate ÷ 100)
          *   totalCost = subtotal + taxAmount + otherCosts
+         * ═══════════════════════════════════════════════════
          */
+
+        // ── Row counter (keeps IDs unique even after deletions) ──
+        var rowCount = 0;
+
+        // ── On page load ──────────────────────────────────────
+        window.onload = function () {
+            setDefaultDate();
+            addRow();   // start with one blank row
+            addRow();   // start with two blank rows
+            addRow();   // start with three blank rows
+            addRow();   // start with four blank rows
+        };
+
+        // ── Set today's date as the default ───────────────────
+        function setDefaultDate() {
+            var today = new Date();
+            var yyyy  = today.getFullYear();
+            var mm    = String(today.getMonth() + 1).padStart(2, '0');
+            var dd    = String(today.getDate()).padStart(2, '0');
+            var formatted = yyyy + '-' + mm + '-' + dd;
+
+            document.getElementById('invoiceDate').value = formatted;
+            document.getElementById('invoiceDateDisplay').textContent = formatDateDisplay(formatted);
+        }
+
+        // ── Format date for display (MM/DD/YYYY) ──────────────
+        function formatDateDisplay(val) {
+            if (!val) return '—';
+            var parts = val.split('-');
+            return parts[1] + '/' + parts[2] + '/' + parts[0];
+        }
+
+        function syncDate() {
+            var val = document.getElementById('invoiceDate').value;
+            document.getElementById('invoiceDateDisplay').textContent = formatDateDisplay(val);
+        }
+
+        // ── Sync any text field → invoice display ─────────────
+        function syncText(inputId, displayId, placeholder) {
+            var val = document.getElementById(inputId).value.trim();
+            document.getElementById(displayId).textContent = val || placeholder;
+        }
+
+        // ── Add a new item row ────────────────────────────────
+        function addRow() {
+            rowCount++;
+            var tbody = document.getElementById('itemsBody');
+            var isAlt = (tbody.rows.length % 2 === 1);
+
+            var tr = document.createElement('tr');
+            if (isAlt) tr.classList.add('inv-row-alt');
+            tr.id = 'row-' + rowCount;
+
+            tr.innerHTML =
+                '<td>' +
+                    '<input type="text" class="inv-input" placeholder="Item description">' +
+                '</td>' +
+                '<td>' +
+                    '<input type="number" class="inv-input amount-input" ' +
+                           'placeholder="0.00" step="0.01" min="0" ' +
+                           'oninput="validateAmount(this); calculateTotals();">' +
+                '</td>' +
+                '<td class="col-del">' +
+                    '<button class="btn-del-row" onclick="deleteRow(' + rowCount + ')" ' +
+                            'title="Remove row">✕</button>' +
+                '</td>';
+
+            tbody.appendChild(tr);
+            restripeRows();
+        }
+
+        // ── Delete a row ──────────────────────────────────────
+        function deleteRow(id) {
+            var tbody = document.getElementById('itemsBody');
+            if (tbody.rows.length <= 1) {
+                showValidation('You must have at least one item row.');
+                return;
+            }
+            var row = document.getElementById('row-' + id);
+            if (row) row.remove();
+            restripeRows();
+            calculateTotals();
+        }
+
+        // ── Re-apply alternating row colours after add/delete ─
+        function restripeRows() {
+            var rows = document.getElementById('itemsBody').rows;
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].classList.remove('inv-row-alt');
+                if (i % 2 === 1) rows[i].classList.add('inv-row-alt');
+            }
+        }
+
+        // ── Validate: only positive numbers in amount fields ──
+        function validateAmount(input) {
+            var val = parseFloat(input.value);
+            if (input.value !== '' && (isNaN(val) || val < 0)) {
+                input.style.borderBottom = '2px solid #c0392b';
+                showValidation('Amounts must be positive numbers.');
+            } else {
+                input.style.borderBottom = '';
+                clearValidation();
+            }
+        }
+
+        // ── Calculate subtotal, tax, and total ────────────────
         function calculateTotals() {
 
-            // Step 1: Add up all item amounts
-            var amountInputs = document.getElementsByClassName("amount-input");
+            // Step 1: Sum all amount inputs
+            var amountInputs = document.getElementsByClassName('amount-input');
             var subtotal = 0;
 
             for (var i = 0; i < amountInputs.length; i++) {
@@ -207,18 +344,80 @@
                 }
             }
 
-            // Step 2: Get tax rate and other costs
-            var taxRate    = parseFloat(document.getElementById("taxRate").value)    || 0;
-            var otherCosts = parseFloat(document.getElementById("otherCosts").value) || 0;
+            // Step 2: Read tax rate and other costs
+            var taxRate    = parseFloat(document.getElementById('taxRate').value)    || 0;
+            var otherCosts = parseFloat(document.getElementById('otherCosts').value) || 0;
 
-            // Step 3: Calculate
+            // Step 3: Apply formula
             var taxAmount = subtotal * (taxRate / 100);
             var totalCost = subtotal + taxAmount + otherCosts;
 
-            // Step 4: Display
-            document.getElementById("subtotalDisplay").textContent = "$" + subtotal.toFixed(2);
-            document.getElementById("totalDisplay").textContent    = "$" + totalCost.toFixed(2);
+            // Step 4: Display results
+            document.getElementById('subtotalDisplay').textContent   = '$' + subtotal.toFixed(2);
+            document.getElementById('taxAmountDisplay').textContent  = '$' + taxAmount.toFixed(2);
+            document.getElementById('totalDisplay').textContent      = '$' + totalCost.toFixed(2);
         }
+
+        // ── Print: hides UI chrome so invoice prints cleanly ──
+        function printInvoice() {
+            window.print();
+        }
+
+        // ── Clear everything and reset the form ───────────────
+        function clearAll() {
+            // Clear all text inputs in the panel
+            var inputs = document.querySelectorAll('.edit-input');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+            }
+
+            // Reset all display spans to placeholders
+            document.getElementById('companyNameDisplay').textContent  = 'Company Name';
+            document.getElementById('companyAddressDisplay').textContent = 'Address, City, ST, ZIP Code';
+            document.getElementById('companyPhoneDisplay').textContent = 'Phone Number | Fax Number';
+            document.getElementById('invoiceNumDisplay').textContent   = '100';
+            document.getElementById('billNameDisplay').textContent     = 'Name | Company';
+            document.getElementById('billAddressDisplay').textContent  = 'Address, City, ST, ZIP Code';
+            document.getElementById('billPhoneDisplay').textContent    = 'Phone';
+            document.getElementById('forDescDisplay').textContent      = 'Product Description';
+            document.getElementById('payableDisplay').textContent      = 'Company Name';
+            document.getElementById('contactDisplay').textContent      = 'Contact Name, Phone Number, Email';
+
+            // Clear tax and other costs
+            document.getElementById('taxRate').value    = '';
+            document.getElementById('otherCosts').value = '';
+
+            // Clear all item rows and add fresh ones
+            document.getElementById('itemsBody').innerHTML = '';
+            rowCount = 0;
+            addRow();
+            addRow();
+            addRow();
+            addRow();
+
+            // Reset totals
+            document.getElementById('subtotalDisplay').textContent  = '$0.00';
+            document.getElementById('taxAmountDisplay').textContent = '$0.00';
+            document.getElementById('totalDisplay').textContent     = '$0.00';
+
+            // Re-set today's date
+            setDefaultDate();
+            clearValidation();
+        }
+
+        // ── Validation message helpers ────────────────────────
+        function showValidation(msg) {
+            var el = document.getElementById('validationMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function clearValidation() {
+            var el = document.getElementById('validationMsg');
+            el.textContent = '';
+            el.style.display = 'none';
+        }
+
     </script>
 
 </body>
