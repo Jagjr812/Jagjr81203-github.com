@@ -80,7 +80,7 @@
 }
 
 /* =========================
-   Responsive Design
+   Responsive Navbar
 ========================= */
 @media screen and (max-width: 768px) {
     .navbar {
@@ -159,9 +159,7 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-    .slider {
-        max-width: 95%;
-    }
+    .slider { max-width: 95%; }
 }
 
 /* =========================
@@ -366,7 +364,7 @@ h1 {
 }
 
 /* =========================
-   Invoice Page
+   Invoice Page Layout
 ========================= */
 .invoice-page {
     display: flex;
@@ -430,7 +428,7 @@ h1 {
 }
 
 .inv-meta-row {
-    padding: 1.2rem 2rem 0.5rem;
+    padding: 1.2rem 2rem 0.8rem;
     border-bottom: 1px solid #eee;
 }
 
@@ -443,7 +441,7 @@ h1 {
 .inv-date {
     color: #555;
     font-size: 0.88rem;
-    margin-top: 0.15rem;
+    margin-top: 0.2rem;
 }
 
 .inv-bill-row {
@@ -473,7 +471,6 @@ h1 {
 .inv-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0;
 }
 
 .inv-table thead tr {
@@ -489,8 +486,13 @@ h1 {
     letter-spacing: 0.03em;
 }
 
-.inv-table thead th:last-child {
+.inv-table thead th:nth-child(2) {
     text-align: right;
+}
+
+.col-del {
+    width: 36px;
+    text-align: center !important;
 }
 
 .inv-table tbody tr td {
@@ -498,9 +500,15 @@ h1 {
     border-bottom: 1px solid #e8e8e8;
 }
 
-.inv-table tbody tr td:last-child {
+.inv-table tbody tr td:nth-child(2) {
     text-align: right;
-    width: 160px;
+    width: 140px;
+}
+
+.inv-table tbody tr td:nth-child(3) {
+    width: 36px;
+    text-align: center;
+    padding: 0.45rem 0.4rem;
 }
 
 .inv-row-alt {
@@ -516,6 +524,7 @@ h1 {
     color: #333;
     outline: none;
     padding: 0.2rem 0;
+    transition: border-bottom 0.2s;
 }
 
 .inv-input:focus {
@@ -523,7 +532,46 @@ h1 {
 }
 
 .inv-input::placeholder {
-    color: #bbb;
+    color: #ccc;
+}
+
+.btn-del-row {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+}
+
+.btn-del-row:hover {
+    color: #c0392b;
+    background: #fff0f0;
+}
+
+.add-row-wrap {
+    padding: 0.6rem 1.2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-add-row {
+    background: none;
+    border: 1px dashed #2457a0;
+    color: #2457a0;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: Georgia, serif;
+}
+
+.btn-add-row:hover {
+    background: #2457a0;
+    color: #fff;
 }
 
 .inv-totals {
@@ -536,9 +584,9 @@ h1 {
 .inv-totals-grid {
     display: grid;
     grid-template-columns: auto 180px;
-    gap: 0.3rem 1rem;
+    gap: 0.35rem 1rem;
     align-items: center;
-    min-width: 320px;
+    min-width: 340px;
 }
 
 .tot-label {
@@ -566,6 +614,7 @@ h1 {
     color: #333;
     outline: none;
     min-width: 0;
+    font-family: Georgia, serif;
     -moz-appearance: textfield;
 }
 
@@ -586,7 +635,7 @@ h1 {
 }
 
 .total-value {
-    background: #1a3a5c;
+    background: #1a3a5c !important;
     color: #fff !important;
     font-weight: bold;
     font-size: 1rem;
@@ -599,7 +648,7 @@ h1 {
     padding: 1rem 2rem;
     font-size: 0.82rem;
     color: #555;
-    line-height: 1.75;
+    line-height: 1.8;
 }
 
 .inv-footer em {
@@ -615,45 +664,68 @@ h1 {
     box-shadow: 0 4px 16px rgba(139,30,30,0.08);
     position: sticky;
     top: 70px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
 }
 
 .edit-title {
     font-size: 1.1rem;
     color: var(--red);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     font-family: Georgia, serif;
 }
 
+.validation-msg {
+    display: none;
+    background: #fff0f0;
+    border-left: 3px solid #c0392b;
+    color: #c0392b;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 3px;
+    margin-bottom: 0.8rem;
+}
+
 .edit-section {
-    margin-bottom: 1.2rem;
-    padding-bottom: 1.2rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 1.1rem;
     border-bottom: 1px solid #f0f0f0;
 }
 
 .edit-section:last-of-type {
     border-bottom: none;
+    margin-bottom: 0.5rem;
+}
+
+.edit-section-label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2457a0;
+    margin-bottom: 0.5rem;
 }
 
 .edit-panel label {
     display: block;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: bold;
-    color: #666;
+    color: #777;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin: 0.6rem 0 0.2rem;
+    margin: 0.55rem 0 0.2rem;
 }
 
-.edit-panel label:first-child {
+.edit-panel label:first-of-type {
     margin-top: 0;
 }
 
 .edit-input {
     width: 100%;
-    padding: 0.45rem 0.6rem;
+    padding: 0.42rem 0.6rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 0.88rem;
+    font-size: 0.87rem;
     color: #333;
     outline: none;
     transition: border-color 0.2s;
@@ -666,13 +738,13 @@ h1 {
 
 .btn-print {
     width: 100%;
-    margin-top: 1rem;
-    padding: 0.75rem;
+    margin-top: 0.6rem;
+    padding: 0.7rem;
     background: var(--red);
     color: #fff;
     border: none;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
@@ -684,16 +756,50 @@ h1 {
     transform: translateY(-1px);
 }
 
-@media print {
-    .navbar, .edit-panel, .page-footer { display: none !important; }
-    .invoice-page { padding: 0; }
-    .invoice-doc  { box-shadow: none; border: none; }
-    .inv-input    { border-bottom: none; }
+.btn-clear {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.7rem;
+    background: #fff;
+    color: #888;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-@media screen and (max-width: 768px) {
-    .invoice-page    { padding: 1rem; flex-direction: column; }
-    .edit-panel      { position: static; flex: 1 1 100%; }
+.btn-clear:hover {
+    background: #fff0f0;
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+/* =========================
+   Print Styles
+========================= */
+@media print {
+    .navbar, .edit-panel, .page-footer,
+    .add-row-wrap, .btn-del-row, .col-del { display: none !important; }
+    .invoice-page  { padding: 0; }
+    .invoice-doc   { box-shadow: none; border: none; flex: 1 1 100%; }
+    .inv-input     { border-bottom: none !important; }
+    .tot-input     { border-bottom: none !important; }
+}
+
+/* =========================
+   Responsive
+========================= */
+@media screen and (max-width: 900px) {
+    .edit-panel      { position: static; flex: 1 1 100%; max-height: none; }
     .inv-bill-row    { flex-direction: column; gap: 1rem; }
     .inv-totals-grid { min-width: 100%; }
+}
+
+@media screen and (max-width: 480px) {
+    .invoice-page  { padding: 0.75rem; }
+    .inv-header    { padding: 1.2rem; }
+    .inv-meta-row,
+    .inv-bill-row,
+    .inv-totals    { padding-left: 1rem; padding-right: 1rem; }
 }
