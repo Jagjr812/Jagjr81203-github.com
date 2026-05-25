@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator – Colonial</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="calculator.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Colonial</div>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li class="dropdown">
+                <a href="index.html#menu">Menu ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html#tapas">Tapas</a></li>
+                    <li><a href="index.html#entrees">Entrées</a></li>
+                    <li><a href="index.html#desserts">Desserts</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#order">Order Online</a></li>
+            <li><a href="index.html#cart">Cart</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="calculator.html">⛽ MPG Calc</a></li>
+            <li><a href="invoice.html">🧾 Invoice</a></li>
+            <li><a href="mortgage.html">🏠 Mortgage</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <div class="mort-hero">
+        <span class="mort-icon">🏠</span>
+        <h1>Home Mortgage Calculator</h1>
+        <p>Enter your mortgage details below to estimate your monthly payment.</p>
+    </div>
+
+    <!-- Main layout: instructions + form side by side (matches textbook Figure 4-18) -->
+    <div class="mort-page">
+
+        <!-- LEFT: Instructions (matches the textbook layout) -->
+        <div class="mort-instructions">
+            <p>
+                To use the Home Mortgage Calculator, enter the amount of
+                the mortgage, the interest of the loan, and the number of years.
+                Then click on the <strong>"Calculate"</strong> button to see an
+                estimate of your monthly payment.
+            </p>
+        </div>
+
+        <!-- RIGHT: The form + nested table (exactly per the textbook) -->
+        <div class="mort-form-wrap">
+
+            <form name="Form1">
+                <table class="mort-table" width="235" height="140">
+
+                    <!-- Row 1: Mortgage amount -->
+                    <tr>
+                        <td class="mort-label">Mortgage:</td>
+                        <td>
+                            <input type="text"
+                                   name="Amount"
+                                   value=" "
+                                   size="9"
+                                   class="mort-input"
+                                   placeholder="e.g. 250000">
+                        </td>
+                    </tr>
+
+                    <!-- Row 2: Interest rate -->
+                    <tr class="mort-row-alt">
+                        <td class="mort-label">Interest (e.g. 7.9)</td>
+                        <td>
+                            <input type="text"
+                                   name="Rate"
+                                   value=" "
+                                   size="9"
+                                   class="mort-input"
+                                   placeholder="e.g. 6.5">
+                        </td>
+                    </tr>
+
+                    <!-- Row 3: Years (select dropdown) -->
+                    <tr>
+                        <td class="mort-label">Years:</td>
+                        <td>
+                            <select name="Years" class="mort-select">
+                                <option value="0">0</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30" selected>30</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <!-- Row 4: Calculate + Reset buttons -->
+                    <tr class="mort-row-alt">
+                        <td>
+                            <input type="button"
+                                   value="Calculate"
+                                   onclick="mortCalc(Form1)"
+                                   class="mort-btn mort-btn-calc">
+                        </td>
+                        <td>
+                            <input type="reset"
+                                   value="Reset"
+                                   class="mort-btn mort-btn-reset">
+                        </td>
+                    </tr>
+
+                    <!-- Row 5: Monthly payment output -->
+                    <tr>
+                        <td class="mort-label">Your monthly payment:</td>
+                        <td>
+                            <input type="text"
+                                   name="Payment"
+                                   size="9"
+                                   class="mort-input mort-output"
+                                   readonly
+                                   placeholder="—">
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+        </div><!-- end .mort-form-wrap -->
+
+    </div><!-- end .mort-page -->
+
+    <!-- How it works note -->
+    <div class="mort-note">
+        <strong>How the calculator works:</strong>
+        The script reads your mortgage amount, interest rate, and number of years.
+        It divides the annual rate by 1,200 to get a monthly rate, multiplies years by 12
+        for total payments, then applies the standard amortization formula:
+        <em>Payment = Principal × (monthlyRate / (1 − (1 + monthlyRate)^−n))</em>.
+        The result is formatted with dollar signs and commas automatically.
+    </div>
+
+    <div class="page-footer">
+        Colonial Spanish Restaurant &nbsp;·&nbsp;
+        Mortgage Calculator &nbsp;·&nbsp;
+        Web Design Assignment — Chapter 4 Hands on Lab
+    </div>
+
+</body>
+</html>
