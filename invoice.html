@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice – Colonial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Colonial</div>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li class="dropdown">
+                <a href="index.html#menu">Menu ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html#tapas">Tapas</a></li>
+                    <li><a href="index.html#entrees">Entrées</a></li>
+                    <li><a href="index.html#desserts">Desserts</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#order">Order Online</a></li>
+            <li><a href="index.html#cart">Cart</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="calculator.html">⛽ MPG Calc</a></li>
+            <li><a href="invoice.html">🧾 Invoice</a></li>
+        </ul>
+    </nav>
+
+    <div class="invoice-page">
+
+        <!-- LEFT: Invoice Document -->
+        <div class="invoice-doc">
+
+            <!-- Header Banner -->
+            <div class="inv-header">
+                <div class="inv-header-text">
+                    <h1 class="inv-company-name" id="companyNameDisplay">Company Name</h1>
+                    <p class="inv-company-meta" id="companyAddressDisplay">Address, City, ST, ZIP Code</p>
+                    <p class="inv-company-meta" id="companyPhoneDisplay">Phone Number | Fax Number</p>
+                </div>
+            </div>
+
+            <!-- Invoice Number & Date -->
+            <div class="inv-meta-row">
+                <h2 class="inv-number">Invoice # <span id="invoiceNumDisplay">100</span></h2>
+                <p class="inv-date">Date: <span id="invoiceDateDisplay">Enter Invoice Date</span></p>
+            </div>
+
+            <!-- Bill To / For -->
+            <div class="inv-bill-row">
+                <div class="inv-bill-to">
+                    <h3 class="inv-section-title">Bill To</h3>
+                    <p id="billNameDisplay">Name | Company</p>
+                    <p id="billAddressDisplay">Address, City, ST, ZIP Code</p>
+                    <p id="billPhoneDisplay">Phone</p>
+                </div>
+                <div class="inv-for">
+                    <h3 class="inv-section-title">For</h3>
+                    <p id="forDescDisplay">Product Description</p>
+                </div>
+            </div>
+
+            <!-- Items Table -->
+            <table class="inv-table">
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
+                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
+                    </tr>
+                    <tr class="inv-row-alt">
+                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
+                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
+                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
+                    </tr>
+                    <tr class="inv-row-alt">
+                        <td><input type="text" class="inv-input" placeholder="Item description"></td>
+                        <td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="calculateTotals()"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="inv-totals">
+                <div class="inv-totals-grid">
+                    <span class="tot-label">Subtotal</span>
+                    <span class="tot-value" id="subtotalDisplay">$0.00</span>
+
+                    <span class="tot-label">Tax Rate</span>
+                    <span class="tot-value">
+                        <input type="number" id="taxRate" class="tot-input"
+                               placeholder="e.g. 8" step="0.01" min="0" max="100"
+                               oninput="calculateTotals()">
+                        <span class="pct-sign">%</span>
+                    </span>
+
+                    <span class="tot-label">Other Costs</span>
+                    <span class="tot-value">
+                        <input type="number" id="otherCosts" class="tot-input"
+                               placeholder="0.00" step="0.01" min="0"
+                               oninput="calculateTotals()">
+                    </span>
+
+                    <span class="tot-label total-label">Total Cost</span>
+                    <span class="tot-value total-value" id="totalDisplay">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="inv-footer">
+                <p><em>Make all checks payable to <span id="payableDisplay">Company Name</span></em></p>
+                <p>If you have any questions concerning this invoice, use the following contact information:</p>
+                <p id="contactDisplay">Contact Name, Phone Number, Email</p>
+                <p>Thank you for your business!</p>
+            </div>
+
+        </div><!-- end .invoice-doc -->
+
+        <!-- RIGHT: Fill-In Panel -->
+        <div class="edit-panel">
+            <h2 class="edit-title">✏️ Fill Invoice</h2>
+
+            <div class="edit-section">
+                <label>Company Name</label>
+                <input type="text" class="edit-input" placeholder="Your Company"
+                       oninput="document.getElementById('companyNameDisplay').textContent = this.value || 'Company Name';
+                                document.getElementById('payableDisplay').textContent = this.value || 'Company Name';">
+                <label>Address</label>
+                <input type="text" class="edit-input" placeholder="123 Main St, City, ST 00000"
+                       oninput="document.getElementById('companyAddressDisplay').textContent = this.value || 'Address, City, ST, ZIP Code';">
+                <label>Phone / Fax</label>
+                <input type="text" class="edit-input" placeholder="555-1234 | Fax 555-5678"
+                       oninput="document.getElementById('companyPhoneDisplay').textContent = this.value || 'Phone Number | Fax Number';">
+            </div>
+
+            <div class="edit-section">
+                <label>Invoice #</label>
+                <input type="text" class="edit-input" placeholder="100"
+                       oninput="document.getElementById('invoiceNumDisplay').textContent = this.value || '100';">
+                <label>Invoice Date</label>
+                <input type="date" class="edit-input"
+                       oninput="document.getElementById('invoiceDateDisplay').textContent = this.value || 'Enter Invoice Date';">
+            </div>
+
+            <div class="edit-section">
+                <label>Bill To — Name / Company</label>
+                <input type="text" class="edit-input" placeholder="Name | Company"
+                       oninput="document.getElementById('billNameDisplay').textContent = this.value || 'Name | Company';">
+                <label>Bill To — Address</label>
+                <input type="text" class="edit-input" placeholder="Address, City, ST, ZIP"
+                       oninput="document.getElementById('billAddressDisplay').textContent = this.value || 'Address, City, ST, ZIP Code';">
+                <label>Bill To — Phone</label>
+                <input type="text" class="edit-input" placeholder="555-0000"
+                       oninput="document.getElementById('billPhoneDisplay').textContent = this.value || 'Phone';">
+                <label>For (Product / Service)</label>
+                <input type="text" class="edit-input" placeholder="Product Description"
+                       oninput="document.getElementById('forDescDisplay').textContent = this.value || 'Product Description';">
+            </div>
+
+            <div class="edit-section">
+                <label>Contact Info (footer)</label>
+                <input type="text" class="edit-input" placeholder="Name, Phone, Email"
+                       oninput="document.getElementById('contactDisplay').textContent = this.value || 'Contact Name, Phone Number, Email';">
+            </div>
+
+            <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
+        </div>
+
+    </div><!-- end .invoice-page -->
+
+    <div class="page-footer">
+        Colonial Spanish Restaurant &nbsp;·&nbsp; Invoice Form &nbsp;·&nbsp; Web Design Assignment
+    </div>
+
+    <script>
+        /*
+         * Invoice Calculator
+         *
+         * Variables:
+         *   subtotal  = sum of all item amounts
+         *   taxRate   = percentage entered by user
+         *   taxAmount = subtotal * (taxRate / 100)
+         *   otherCosts = additional flat costs
+         *   totalCost = subtotal + taxAmount + otherCosts
+         */
+        function calculateTotals() {
+
+            // Step 1: Add up all item amounts
+            var amountInputs = document.getElementsByClassName("amount-input");
+            var subtotal = 0;
+
+            for (var i = 0; i < amountInputs.length; i++) {
+                var val = parseFloat(amountInputs[i].value);
+                if (!isNaN(val) && val > 0) {
+                    subtotal += val;
+                }
+            }
+
+            // Step 2: Get tax rate and other costs
+            var taxRate    = parseFloat(document.getElementById("taxRate").value)    || 0;
+            var otherCosts = parseFloat(document.getElementById("otherCosts").value) || 0;
+
+            // Step 3: Calculate
+            var taxAmount = subtotal * (taxRate / 100);
+            var totalCost = subtotal + taxAmount + otherCosts;
+
+            // Step 4: Display
+            document.getElementById("subtotalDisplay").textContent = "$" + subtotal.toFixed(2);
+            document.getElementById("totalDisplay").textContent    = "$" + totalCost.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
