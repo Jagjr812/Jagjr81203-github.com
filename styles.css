@@ -364,3 +364,336 @@ h1 {
     color: #aaa;
     border-top: 1px solid #eee;
 }
+
+/* =========================
+   Invoice Page
+========================= */
+.invoice-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.invoice-doc {
+    flex: 1 1 560px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.92rem;
+    color: #222;
+}
+
+.inv-header {
+    background: linear-gradient(120deg, #1a3a5c 0%, #2457a0 50%, #1a3a5c 100%);
+    padding: 1.6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.inv-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+
+.inv-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: 60px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+}
+
+.inv-company-name {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+}
+
+.inv-company-meta {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.inv-meta-row {
+    padding: 1.2rem 2rem 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.inv-number {
+    color: #2457a0;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.inv-date {
+    color: #555;
+    font-size: 0.88rem;
+    margin-top: 0.15rem;
+}
+
+.inv-bill-row {
+    display: flex;
+    gap: 2rem;
+    padding: 1.4rem 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.inv-bill-to { flex: 1; }
+.inv-for     { flex: 1; }
+
+.inv-section-title {
+    color: #2457a0;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+.inv-bill-to p,
+.inv-for p {
+    color: #444;
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+
+.inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.inv-table thead tr {
+    background: #1a3a5c;
+}
+
+.inv-table thead th {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.7rem 1.2rem;
+    text-align: left;
+    letter-spacing: 0.03em;
+}
+
+.inv-table thead th:last-child {
+    text-align: right;
+}
+
+.inv-table tbody tr td {
+    padding: 0.45rem 1.2rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.inv-table tbody tr td:last-child {
+    text-align: right;
+    width: 160px;
+}
+
+.inv-row-alt {
+    background: #f2f4f8;
+}
+
+.inv-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: Georgia, serif;
+    font-size: 0.88rem;
+    color: #333;
+    outline: none;
+    padding: 0.2rem 0;
+}
+
+.inv-input:focus {
+    border-bottom: 1px dashed #2457a0;
+}
+
+.inv-input::placeholder {
+    color: #bbb;
+}
+
+.inv-totals {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.2rem 2rem 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.inv-totals-grid {
+    display: grid;
+    grid-template-columns: auto 180px;
+    gap: 0.3rem 1rem;
+    align-items: center;
+    min-width: 320px;
+}
+
+.tot-label {
+    text-align: right;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.tot-value {
+    background: #eef1f7;
+    padding: 0.35rem 0.8rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.tot-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 0.88rem;
+    color: #333;
+    outline: none;
+    min-width: 0;
+    -moz-appearance: textfield;
+}
+
+.tot-input::-webkit-inner-spin-button,
+.tot-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.pct-sign {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.total-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #222;
+}
+
+.total-value {
+    background: #1a3a5c;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.45rem 0.8rem;
+}
+
+.inv-footer {
+    background: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    padding: 1rem 2rem;
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.75;
+}
+
+.inv-footer em {
+    color: #2457a0;
+}
+
+.edit-panel {
+    flex: 0 1 280px;
+    background: #fff;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(139,30,30,0.08);
+    position: sticky;
+    top: 70px;
+}
+
+.edit-title {
+    font-size: 1.1rem;
+    color: var(--red);
+    margin-bottom: 1rem;
+    font-family: Georgia, serif;
+}
+
+.edit-section {
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.edit-section:last-of-type {
+    border-bottom: none;
+}
+
+.edit-panel label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0.6rem 0 0.2rem;
+}
+
+.edit-panel label:first-child {
+    margin-top: 0;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: Georgia, serif;
+}
+
+.edit-input:focus {
+    border-color: #2457a0;
+}
+
+.btn-print {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-print:hover {
+    background: var(--gold);
+    color: var(--red);
+    transform: translateY(-1px);
+}
+
+@media print {
+    .navbar, .edit-panel, .page-footer { display: none !important; }
+    .invoice-page { padding: 0; }
+    .invoice-doc  { box-shadow: none; border: none; }
+    .inv-input    { border-bottom: none; }
+}
+
+@media screen and (max-width: 768px) {
+    .invoice-page    { padding: 1rem; flex-direction: column; }
+    .edit-panel      { position: static; flex: 1 1 100%; }
+    .inv-bill-row    { flex-direction: column; gap: 1rem; }
+    .inv-totals-grid { min-width: 100%; }
+}
