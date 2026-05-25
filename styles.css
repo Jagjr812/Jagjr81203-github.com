@@ -9,17 +9,16 @@
 
 /* =========================
    Color Variables
-   (Red, Gold, White theme)
 ========================= */
 :root {
-    --red: #8b1e1e;
-    --gold: #d4af37;
-    --white: #ffffff;
+    --red:      #8b1e1e;
+    --gold:     #d4af37;
+    --white:    #ffffff;
     --dark-red: #6f1616;
 }
 
 /* =========================
-   Navbar Styling
+   Navbar
 ========================= */
 .navbar {
     background-color: var(--red);
@@ -29,20 +28,18 @@
     padding: 1rem 2rem;
 }
 
-/* Logo */
 .logo {
     color: var(--gold);
     font-size: 1.8rem;
     font-weight: bold;
 }
 
-/* Navigation Menu */
 .nav-menu {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
 }
 
-/* Menu Links */
 .nav-menu li {
     position: relative;
 }
@@ -55,7 +52,6 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover / Rollover Effects */
 .nav-menu a:hover {
     background-color: var(--gold);
     color: var(--red);
@@ -79,7 +75,6 @@
     padding: 0.75rem 1rem;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
     display: block;
 }
@@ -88,21 +83,17 @@
    Responsive Design
 ========================= */
 @media screen and (max-width: 768px) {
-
     .navbar {
         flex-direction: column;
         align-items: flex-start;
     }
-
     .nav-menu {
         flex-direction: column;
         width: 100%;
     }
-
     .nav-menu a {
         width: 100%;
     }
-
     .dropdown-menu {
         position: static;
         width: 100%;
@@ -110,7 +101,7 @@
 }
 
 /* =========================
-   Page Content Styling
+   Page Content
 ========================= */
 section {
     padding: 2rem;
@@ -123,7 +114,6 @@ h1 {
 /* =========================
    Image Slider
 ========================= */
-
 .slider {
     position: relative;
     max-width: 800px;
@@ -143,12 +133,10 @@ h1 {
     border-radius: 10px;
 }
 
-/* Active slide */
 .slide.active {
     display: block;
 }
 
-/* Buttons */
 .prev, .next {
     position: absolute;
     top: 50%;
@@ -162,22 +150,217 @@ h1 {
     border-radius: 50%;
 }
 
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
+.prev { left: 10px; }
+.next { right: 10px; }
 
 .prev:hover, .next:hover {
     background-color: var(--gold);
     color: var(--red);
 }
 
-/* Responsive Slider */
 @media screen and (max-width: 768px) {
     .slider {
         max-width: 95%;
     }
+}
+
+/* =========================
+   Calculator Page
+========================= */
+.calc-hero {
+    text-align: center;
+    padding: 2.5rem 2rem 1rem;
+}
+
+.calc-logo {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.calc-hero h1 {
+    color: var(--red);
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.calc-hero p {
+    color: #555;
+    font-size: 1rem;
+}
+
+.calc-card {
+    background: #fff;
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    max-width: 480px;
+    margin: 1.5rem auto 3rem;
+    padding: 2rem 2.2rem;
+    box-shadow: 0 6px 24px rgba(139, 30, 30, 0.12);
+}
+
+.debug-box {
+    background: #fff8f0;
+    border-left: 4px solid var(--gold);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.6rem;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+.debug-box strong {
+    display: block;
+    color: var(--red);
+    font-size: 0.92rem;
+    margin-bottom: 0.3rem;
+}
+
+.debug-box code {
+    font-family: 'Courier New', monospace;
+    background: #f0f0f0;
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.strike { text-decoration: line-through; color: #c0392b; }
+.fix    { color: #1a7a1a; font-weight: bold; }
+
+.field {
+    margin-bottom: 1.4rem;
+}
+
+.field label {
+    display: block;
+    font-weight: bold;
+    color: var(--red);
+    margin-bottom: 0.4rem;
+    font-size: 0.97rem;
+}
+
+.field label span {
+    font-weight: normal;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.field input[type="number"] {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+    transition: border-color 0.25s;
+    -moz-appearance: textfield;
+}
+
+.field input[type="number"]::-webkit-inner-spin-button,
+.field input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.field input[type="number"]:focus {
+    border-color: var(--gold);
+}
+
+.field input[type="number"]::placeholder {
+    color: #bbb;
+}
+
+.btn-calc {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.15s;
+}
+
+.btn-calc:hover {
+    background-color: var(--gold);
+    color: var(--red);
+    transform: translateY(-1px);
+}
+
+.btn-calc:active {
+    transform: translateY(0);
+}
+
+.result {
+    display: none;
+    margin-top: 1.6rem;
+    padding: 1.2rem 1.4rem;
+    background: #fff8f0;
+    border-left: 4px solid var(--red);
+    border-radius: 6px;
+    animation: fadeUp 0.35s ease;
+}
+
+.result.show  { display: block; }
+.result.error { border-left-color: #c0392b; background: #fff0f0; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.result-label {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #888;
+}
+
+.result-value {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: var(--red);
+    line-height: 1.1;
+    margin: 0.2rem 0;
+}
+
+.result-value.error-text {
+    font-size: 1rem;
+    color: #c0392b;
+}
+
+.result-desc {
+    font-size: 0.92rem;
+    color: #555;
+}
+
+.reset-wrap {
+    text-align: center;
+    margin-top: 0.9rem;
+}
+
+.reset-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.reset-btn:hover {
+    color: var(--red);
+}
+
+.page-footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: #aaa;
+    border-top: 1px solid #eee;
 }
