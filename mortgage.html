@@ -12,36 +12,33 @@
     <nav class="navbar">
         <div class="logo">Colonial</div>
         <ul class="nav-menu">
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
             <li class="dropdown">
-                <a href="index.html#menu">Menu ▾</a>
+                <a href="menu.html">Menu ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="index.html#tapas">Tapas</a></li>
-                    <li><a href="index.html#entrees">Entrées</a></li>
-                    <li><a href="index.html#desserts">Desserts</a></li>
+                    <li><a href="menu.html#tapas">Tapas</a></li>
+                    <li><a href="menu.html#entrees">Entrées</a></li>
+                    <li><a href="menu.html#desserts">Desserts</a></li>
                 </ul>
             </li>
-            <li><a href="index.html#order">Order Online</a></li>
-            <li><a href="index.html#cart">Cart</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="order.html">Order Online</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
             <li><a href="calculator.html">⛽ MPG Calc</a></li>
             <li><a href="invoice.html">🧾 Invoice</a></li>
             <li><a href="mortgage.html">🏠 Mortgage</a></li>
         </ul>
     </nav>
 
-    <!-- Hero -->
     <div class="mort-hero">
         <span class="mort-icon">🏠</span>
         <h1>Home Mortgage Calculator</h1>
         <p>Enter your mortgage details below to estimate your monthly payment.</p>
     </div>
 
-    <!-- Main layout: instructions + form side by side (matches textbook Figure 4-18) -->
     <div class="mort-page">
 
-        <!-- LEFT: Instructions (matches the textbook layout) -->
         <div class="mort-instructions">
             <p>
                 To use the Home Mortgage Calculator, enter the amount of
@@ -51,39 +48,26 @@
             </p>
         </div>
 
-        <!-- RIGHT: The form + nested table (exactly per the textbook) -->
         <div class="mort-form-wrap">
-
             <form name="Form1">
                 <table class="mort-table" width="235" height="140">
 
-                    <!-- Row 1: Mortgage amount -->
                     <tr>
                         <td class="mort-label">Mortgage:</td>
                         <td>
-                            <input type="text"
-                                   name="Amount"
-                                   value=" "
-                                   size="9"
-                                   class="mort-input"
-                                   placeholder="e.g. 250000">
+                            <input type="text" name="Amount" value=" " size="9"
+                                   class="mort-input" placeholder="e.g. 250000">
                         </td>
                     </tr>
 
-                    <!-- Row 2: Interest rate -->
                     <tr class="mort-row-alt">
                         <td class="mort-label">Interest (e.g. 7.9)</td>
                         <td>
-                            <input type="text"
-                                   name="Rate"
-                                   value=" "
-                                   size="9"
-                                   class="mort-input"
-                                   placeholder="e.g. 6.5">
+                            <input type="text" name="Rate" value=" " size="9"
+                                   class="mort-input" placeholder="e.g. 6.5">
                         </td>
                     </tr>
 
-                    <!-- Row 3: Years (select dropdown) -->
                     <tr>
                         <td class="mort-label">Years:</td>
                         <td>
@@ -97,42 +81,33 @@
                         </td>
                     </tr>
 
-                    <!-- Row 4: Calculate + Reset buttons -->
                     <tr class="mort-row-alt">
                         <td>
-                            <input type="button"
-                                   value="Calculate"
+                            <input type="button" value="Calculate"
                                    onclick="mortCalc(Form1)"
                                    class="mort-btn mort-btn-calc">
                         </td>
                         <td>
-                            <input type="reset"
-                                   value="Reset"
+                            <input type="reset" value="Reset"
                                    class="mort-btn mort-btn-reset">
                         </td>
                     </tr>
 
-                    <!-- Row 5: Monthly payment output -->
                     <tr>
                         <td class="mort-label">Your monthly payment:</td>
                         <td>
-                            <input type="text"
-                                   name="Payment"
-                                   size="9"
+                            <input type="text" name="Payment" size="9"
                                    class="mort-input mort-output"
-                                   readonly
-                                   placeholder="—">
+                                   readonly placeholder="—">
                         </td>
                     </tr>
 
                 </table>
             </form>
+        </div>
 
-        </div><!-- end .mort-form-wrap -->
+    </div>
 
-    </div><!-- end .mort-page -->
-
-    <!-- How it works note -->
     <div class="mort-note">
         <strong>How the calculator works:</strong>
         The script reads your mortgage amount, interest rate, and number of years.
@@ -149,4 +124,4 @@
     </div>
 
 </body>
-</html>
+</html>>
