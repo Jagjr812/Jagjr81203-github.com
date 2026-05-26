@@ -829,7 +829,6 @@ h1 {
     font-size: 1rem;
 }
 
-/* Main layout: instructions left, form right */
 .mort-page {
     display: flex;
     flex-wrap: wrap;
@@ -843,7 +842,6 @@ h1 {
     background: #fff;
 }
 
-/* Instructions cell (left) */
 .mort-instructions {
     flex: 1 1 220px;
     background: #fff;
@@ -855,14 +853,12 @@ h1 {
     font-family: Georgia, serif;
 }
 
-/* Form cell (right) */
 .mort-form-wrap {
     flex: 1 1 260px;
     padding: 1rem 1.2rem;
     background: #fff;
 }
 
-/* The nested table — matches textbook exactly */
 .mort-table {
     width: 100%;
     border-collapse: collapse;
@@ -886,7 +882,6 @@ h1 {
     font-size: 0.85rem;
 }
 
-/* Inputs inside the mortgage table */
 .mort-input {
     width: 100%;
     border: 1px solid #bbb;
@@ -908,14 +903,12 @@ h1 {
     color: #ccc;
 }
 
-/* Read-only output field */
 .mort-output {
     background: #f0f4f0;
     font-weight: bold;
     color: var(--red);
 }
 
-/* Dropdown select */
 .mort-select {
     width: 100%;
     padding: 0.3rem 0.4rem;
@@ -933,7 +926,6 @@ h1 {
     border-color: var(--red);
 }
 
-/* Calculate and Reset buttons */
 .mort-btn {
     width: 100%;
     padding: 0.45rem 0.6rem;
@@ -968,7 +960,6 @@ h1 {
     color: #333;
 }
 
-/* How it works note */
 .mort-note {
     max-width: 700px;
     margin: 0 auto 2rem;
@@ -982,17 +973,281 @@ h1 {
     font-family: Georgia, serif;
 }
 
-.mort-note strong {
-    color: var(--red);
-}
+.mort-note strong { color: var(--red); }
+.mort-note em     { font-style: italic; color: #333; }
 
-.mort-note em {
-    font-style: italic;
-    color: #333;
-}
-
-/* Responsive mortgage */
 @media screen and (max-width: 600px) {
-    .mort-page          { flex-direction: column; }
-    .mort-instructions  { border-right: none; border-bottom: 1px solid #ddd; }
+    .mort-page         { flex-direction: column; }
+    .mort-instructions { border-right: none; border-bottom: 1px solid #ddd; }
 }
+
+/* =========================
+   General Content Pages
+   (About, Menu, Order, Cart, Contact)
+========================= */
+.content-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.content-hero {
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+}
+
+.content-hero h1 {
+    color: var(--red);
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.content-subtitle {
+    color: #666;
+    font-size: 1.05rem;
+    font-style: italic;
+}
+
+.content-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem 2.4rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    margin-bottom: 2rem;
+}
+
+.content-card h2 {
+    color: var(--red);
+    font-size: 1.2rem;
+    margin: 1.4rem 0 0.5rem;
+}
+
+.content-card h2:first-child {
+    margin-top: 0;
+}
+
+.content-card p {
+    color: #444;
+    line-height: 1.75;
+    font-size: 0.97rem;
+    margin-bottom: 0.6rem;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.4rem 0;
+}
+
+.info-list li {
+    padding: 0.35rem 0;
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+   Menu Page
+========================= */
+.menu-category {
+    margin-bottom: 2.5rem;
+}
+
+.menu-cat-title {
+    color: var(--red);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.menu-item {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+}
+
+.menu-item:hover {
+    box-shadow: 0 4px 16px rgba(139,30,30,0.10);
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3rem;
+}
+
+.menu-item-name {
+    font-weight: bold;
+    color: #222;
+    font-size: 0.97rem;
+}
+
+.menu-item-price {
+    color: var(--red);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.menu-item-desc {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.menu-note {
+    background: #fff8f0;
+    border-left: 4px solid var(--gold);
+    padding: 0.9rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.menu-note a {
+    color: var(--red);
+    font-weight: bold;
+}
+
+/* =========================
+   Order Page
+========================= */
+.order-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.order-toggle-btn {
+    flex: 1;
+    padding: 0.65rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    color: #888;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.order-toggle-btn.active {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+}
+
+.order-delivery-fields {
+    margin-bottom: 1.2rem;
+}
+
+.order-section-title {
+    color: var(--red);
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--gold);
+}
+
+.order-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-item {
+    background: #fafafa;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.order-item-info {
+    flex: 1;
+}
+
+.order-item-name {
+    display: block;
+    font-weight: bold;
+    color: #222;
+    font-size: 0.92rem;
+}
+
+.order-item-price {
+    display: block;
+    color: var(--red);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 0.1rem 0;
+}
+
+.order-item-desc {
+    color: #888;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.order-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.order-item-qty button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--red);
+    transition: background 0.15s;
+    line-height: 1;
+}
+
+.order-item-qty button:hover {
+    background: var(--gold);
+    color: var(--red);
+    border-color: var(--gold);
+}
+
+.order-item-qty .qty {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.order-summary {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem 1.4rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.o
