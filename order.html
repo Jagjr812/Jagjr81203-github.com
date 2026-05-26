@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online – Colonial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Colonial</div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="menu.html">Menu ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="menu.html#tapas">Tapas</a></li>
+                    <li><a href="menu.html#entrees">Entrées</a></li>
+                    <li><a href="menu.html#desserts">Desserts</a></li>
+                </ul>
+            </li>
+            <li><a href="order.html">Order Online</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="calculator.html">⛽ MPG Calc</a></li>
+            <li><a href="invoice.html">🧾 Invoice</a></li>
+            <li><a href="mortgage.html">🏠 Mortgage</a></li>
+        </ul>
+    </nav>
+
+    <section class="content-section">
+        <div class="content-hero">
+            <h1>Order Online</h1>
+            <p class="content-subtitle">Fresh from our kitchen to your door. Pickup or delivery available.</p>
+        </div>
+
+        <div class="content-card">
+
+            <!-- Order type toggle -->
+            <div class="order-toggle">
+                <button class="order-toggle-btn active" id="btnPickup" onclick="setOrderType('pickup')">🏃 Pickup</button>
+                <button class="order-toggle-btn" id="btnDelivery" onclick="setOrderType('delivery')">🚗 Delivery</button>
+            </div>
+
+            <!-- Delivery address (shown only for delivery) -->
+            <div class="order-delivery-fields" id="deliveryFields" style="display:none;">
+                <div class="order-field">
+                    <label>Delivery Address</label>
+                    <input type="text" class="order-input" placeholder="Street address">
+                </div>
+                <div class="order-field-row">
+                    <div class="order-field">
+                        <label>City</label>
+                        <input type="text" class="order-input" placeholder="City">
+                    </div>
+                    <div class="order-field">
+                        <label>ZIP Code</label>
+                        <input type="text" class="order-input" placeholder="33135">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu sections -->
+            <h2 class="order-section-title" id="tapas">🫒 Tapas</h2>
+            <div class="order-grid">
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Patatas Bravas</span>
+                        <span class="order-item-price">$8.00</span>
+                        <p class="order-item-desc">Crispy potatoes with bravas sauce and aioli.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Gambas al Ajillo</span>
+                        <span class="order-item-price">$13.00</span>
+                        <p class="order-item-desc">Sizzling garlic shrimp in olive oil.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Croquetas de Jamón</span>
+                        <span class="order-item-price">$10.00</span>
+                        <p class="order-item-desc">Ham and béchamel croquettes.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Tortilla Española</span>
+                        <span class="order-item-price">$11.00</span>
+                        <p class="order-item-desc">Classic Spanish omelette.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="order-section-title" id="entrees">🍽️ Entrées</h2>
+            <div class="order-grid">
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Paella Valenciana</span>
+                        <span class="order-item-price">$28.00</span>
+                        <p class="order-item-desc">Traditional saffron rice with chicken and rabbit.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Paella de Mariscos</span>
+                        <span class="order-item-price">$32.00</span>
+                        <p class="order-item-desc">Seafood paella with shrimp, mussels, and clams.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Ropa Vieja</span>
+                        <span class="order-item-price">$24.00</span>
+                        <p class="order-item-desc">Slow-braised shredded beef in sofrito.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Pollo al Ajillo</span>
+                        <span class="order-item-price">$22.00</span>
+                        <p class="order-item-desc">Roasted chicken in white wine and garlic.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="order-section-title" id="desserts">🍮 Desserts</h2>
+            <div class="order-grid">
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Crema Catalana</span>
+                        <span class="order-item-price">$9.00</span>
+                        <p class="order-item-desc">Silky custard with caramelized sugar crust.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <span class="order-item-name">Churros con Chocolate</span>
+                        <span class="order-item-price">$10.00</span>
+                        <p class="order-item-desc">Fresh churros with dark chocolate sauce.</p>
+                    </div>
+                    <div class="order-item-qty">
+                        <button onclick="changeQty(this, -1)">−</button>
+                        <span class="qty">0</span>
+                        <button onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order summary -->
+            <div class="order-summary">
+                <div class="order-summary-row">
+                    <span>Subtotal</span>
+                    <span id="orderSubtotal">$0.00</span>
+                </div>
+                <div class="order-summary-row">
+                    <span>Tax (8%)</span>
+                    <span id="orderTax">$0.00</span>
+                </div>
+                <div class="order-summary-row order-total-row">
+                    <span>Total</span>
+                    <span id="orderTotal">$0.00</span>
+                </div>
+            </div>
+
+            <div class="order-field">
+                <label>Your Name</label>
+                <input type="text" class="order-input" placeholder="Full name">
+            </div>
+            <div class="order-field">
+                <label>Phone Number</label>
+                <input type="text" class="order-input" placeholder="(305) 555-0000">
+            </div>
+            <div class="order-field">
+                <label>Special Instructions</label>
+                <textarea class="order-input order-textarea" placeholder="Allergies, preferences, notes..."></textarea>
+            </div>
+
+            <button class="btn-order" onclick="placeOrder()">Place Order →</button>
+            <div class="order-confirm" id="orderConfirm"></div>
+
+        </div>
+    </section>
+
+    <div class="page-footer">
+        Colonial Spanish Restaurant &nbsp;·&nbsp; Miami, FL &nbsp;·&nbsp; Est. 1987
+    </div>
+
+    <script>
+        var prices = [8, 13, 10, 11, 28, 32, 24, 22, 9, 10];
+
+        function setOrderType(type) {
+            document.getElementById('deliveryFields').style.display =
+                type === 'delivery' ? 'block' : 'none';
+            document.getElementById('btnPickup').classList.toggle('active', type === 'pickup');
+            document.getElementById('btnDelivery').classList.toggle('active', type === 'delivery');
+        }
+
+        function changeQty(btn, delta) {
+            var qtyEl = btn.parentElement.querySelector('.qty');
+            var current = parseInt(qtyEl.textContent);
+            var next = Math.max(0, current + delta);
+            qtyEl.textContent = next;
+            updateOrderTotal();
+        }
+
+        function updateOrderTotal() {
+            var items = document.querySelectorAll('.order-item');
+            var subtotal = 0;
+            items.forEach(function(item, i) {
+                var qty = parseInt(item.querySelector('.qty').textContent);
+                subtotal += qty * prices[i];
+            });
+            var tax = subtotal * 0.08;
+            var total = subtotal + tax;
+            document.getElementById('orderSubtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('orderTax').textContent      = '$' + tax.toFixed(2);
+            document.getElementById('orderTotal').textContent    = '$' + total.toFixed(2);
+        }
+
+        function placeOrder() {
+            var total = document.getElementById('orderTotal').textContent;
+            if (total === '$0.00') {
+                document.getElementById('orderConfirm').innerHTML =
+                    '<p class="order-msg error">Please add at least one item to your order.</p>';
+                return;
+            }
+            document.getElementById('orderConfirm').innerHTML =
+                '<p class="order-msg success">✅ Order received! Your total is <strong>' +
+                total + '</strong>. We\'ll call you when it\'s ready. Thank you!</p>';
+        }
+    </script>
+
+</body>
+</html>
