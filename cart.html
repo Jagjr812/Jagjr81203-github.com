@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart – Colonial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Colonial</div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="menu.html">Menu ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="menu.html#tapas">Tapas</a></li>
+                    <li><a href="menu.html#entrees">Entrées</a></li>
+                    <li><a href="menu.html#desserts">Desserts</a></li>
+                </ul>
+            </li>
+            <li><a href="order.html">Order Online</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="calculator.html">⛽ MPG Calc</a></li>
+            <li><a href="invoice.html">🧾 Invoice</a></li>
+            <li><a href="mortgage.html">🏠 Mortgage</a></li>
+        </ul>
+    </nav>
+
+    <section class="content-section">
+        <div class="content-hero">
+            <h1>🛒 Your Cart</h1>
+            <p class="content-subtitle">Review your order before checkout.</p>
+        </div>
+
+        <div class="content-card">
+            <div class="cart-empty" id="cartEmpty">
+                <p>Your cart is empty.</p>
+                <a href="order.html" class="btn-order" style="display:inline-block;text-decoration:none;margin-top:1rem;">
+                    Browse Menu &amp; Order →
+                </a>
+            </div>
+
+            <div id="cartItems" style="display:none;">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartBody"></tbody>
+                </table>
+
+                <div class="order-summary">
+                    <div class="order-summary-row">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">$0.00</span>
+                    </div>
+                    <div class="order-summary-row">
+                        <span>Tax (8%)</span>
+                        <span id="cartTax">$0.00</span>
+                    </div>
+                    <div class="order-summary-row order-total-row">
+                        <span>Total</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <button class="btn-order" onclick="checkout()">Checkout →</button>
+                <button class="btn-clear" style="margin-top:0.5rem;" onclick="clearCart()">🗑️ Clear Cart</button>
+                <div class="order-confirm" id="checkoutConfirm"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-footer">
+        Colonial Spanish Restaurant &nbsp;·&nbsp; Miami, FL &nbsp;·&nbsp; Est. 1987
+    </div>
+
+    <script>
+        // Sample cart data — in a real site this would come from localStorage or a backend
+        var cartData = [
+            { name: 'Paella de Mariscos', price: 32.00, qty: 1 },
+            { name: 'Patatas Bravas',     price: 8.00,  qty: 2 },
+            { name: 'Crema Catalana',     price: 9.00,  qty: 2 }
+        ];
+
+        function renderCart() {
+            if (cartData.length === 0) {
+                document.getElementById('cartEmpty').style.display = 'block';
+                document.getElementById('cartItems').style.display = 'none';
+                return;
+            }
+            document.getElementById('cartEmpty').style.display = 'none';
+            document.getElementById('cartItems').style.display = 'block';
+
+            var tbody = document.getElementById('cartBody');
+            tbody.innerHTML = '';
+            var subtotal = 0;
+
+            cartData.forEach(function(item, i) {
+                var lineTotal = item.price * item.qty;
+                subtotal += lineTotal;
+                var tr = document.createElement('tr');
+                tr.innerHTML =
+                    '<td>' + item.name + '</td>' +
+                    '<td>$' + item.price.toFixed(2) + '</td>' +
+                    '<td>' +
+                        '<button onclick="adjustQty(' + i + ',-1)">−</button> ' +
+                        item.qty +
+                        ' <button onclick="adjustQty(' + i + ',1)">+</button>' +
+                    '</td>' +
+                    '<td>$' + lineTotal.toFixed(2) + '</td>' +
+                    '<td><button class="btn-del-row" onclick="removeItem(' + i + ')">✕</button></td>';
+                tbody.appendChild(tr);
+            });
+
+            var tax   = subtotal * 0.08;
+            var total = subtotal + tax;
+            document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('cartTax').textContent      = '$' + tax.toFixed(2);
+            document.getElementById('cartTotal').textContent    = '$' + total.toFixed(2);
+        }
+
+        function adjustQty(index, delta) {
+            cartData[index].qty = Math.max(1, cartData[index].qty + delta);
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cartData.splice(index, 1);
+            renderCart();
+        }
+
+        function clearCart() {
+            cartData = [];
+            renderCart();
+        }
+
+        function checkout() {
+            var total = document.getElementById('cartTotal').textContent;
+            document.getElementById('checkoutConfirm').innerHTML =
+                '<p class="order-msg success">✅ Order placed! Your total is <strong>' +
+                total + '</strong>. We\'ll call you when it\'s ready. ¡Gracias!</p>';
+        }
+
+        renderCart();
+    </script>
+
+</body>
+</html>
