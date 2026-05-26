@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,19 +11,19 @@
     <nav class="navbar">
         <div class="logo">Colonial</div>
         <ul class="nav-menu">
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
             <li class="dropdown">
-                <a href="index.html#menu">Menu ▾</a>
+                <a href="menu.html">Menu ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="index.html#tapas">Tapas</a></li>
-                    <li><a href="index.html#entrees">Entrées</a></li>
-                    <li><a href="index.html#desserts">Desserts</a></li>
+                    <li><a href="menu.html#tapas">Tapas</a></li>
+                    <li><a href="menu.html#entrees">Entrées</a></li>
+                    <li><a href="menu.html#desserts">Desserts</a></li>
                 </ul>
             </li>
-            <li><a href="index.html#order">Order Online</a></li>
-            <li><a href="index.html#cart">Cart</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="order.html">Order Online</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
             <li><a href="calculator.html">⛽ MPG Calc</a></li>
             <li><a href="invoice.html">🧾 Invoice</a></li>
             <li><a href="mortgage.html">🏠 Mortgage</a></li>
@@ -32,23 +32,19 @@
 
     <div class="invoice-page">
 
-        <!-- LEFT: Live Invoice Document -->
         <div class="invoice-doc">
 
-            <!-- Header Banner -->
             <div class="inv-header">
                 <h1 class="inv-company-name" id="companyNameDisplay">Company Name</h1>
                 <p class="inv-company-meta" id="companyAddressDisplay">Address, City, ST, ZIP Code</p>
                 <p class="inv-company-meta" id="companyPhoneDisplay">Phone Number | Fax Number</p>
             </div>
 
-            <!-- Invoice Number & Date -->
             <div class="inv-meta-row">
                 <h2 class="inv-number">Invoice # <span id="invoiceNumDisplay">100</span></h2>
                 <p class="inv-date">Date: <span id="invoiceDateDisplay">—</span></p>
             </div>
 
-            <!-- Bill To / For -->
             <div class="inv-bill-row">
                 <div class="inv-bill-to">
                     <h3 class="inv-section-title">Bill To</h3>
@@ -62,7 +58,6 @@
                 </div>
             </div>
 
-            <!-- Items Table -->
             <table class="inv-table">
                 <thead>
                     <tr>
@@ -71,20 +66,15 @@
                         <th class="col-del"></th>
                     </tr>
                 </thead>
-                <tbody id="itemsBody">
-                    <!-- Rows injected by JS -->
-                </tbody>
+                <tbody id="itemsBody"></tbody>
             </table>
 
-            <!-- Add Row Button -->
             <div class="add-row-wrap">
                 <button class="btn-add-row" onclick="addRow()">+ Add Item</button>
             </div>
 
-            <!-- Totals -->
             <div class="inv-totals">
                 <div class="inv-totals-grid">
-
                     <span class="tot-label">Subtotal</span>
                     <span class="tot-value" id="subtotalDisplay">$0.00</span>
 
@@ -108,11 +98,9 @@
 
                     <span class="tot-label total-label">Total Cost</span>
                     <span class="tot-value total-value" id="totalDisplay">$0.00</span>
-
                 </div>
             </div>
 
-            <!-- Invoice Footer -->
             <div class="inv-footer">
                 <p><em>Make all checks payable to <span id="payableDisplay">Company Name</span></em></p>
                 <p>If you have any questions concerning this invoice, use the following contact information:</p>
@@ -120,9 +108,8 @@
                 <p>Thank you for your business!</p>
             </div>
 
-        </div><!-- end .invoice-doc -->
+        </div>
 
-        <!-- RIGHT: Fill-In Panel -->
         <div class="edit-panel">
             <h2 class="edit-title">✏️ Fill Invoice</h2>
 
@@ -130,16 +117,13 @@
 
             <div class="edit-section">
                 <p class="edit-section-label">Company Info</p>
-
                 <label>Company Name</label>
                 <input type="text" class="edit-input" placeholder="Your Company" id="companyName"
                        oninput="syncText('companyName','companyNameDisplay','Company Name');
                                 syncText('companyName','payableDisplay','Company Name');">
-
                 <label>Address</label>
                 <input type="text" class="edit-input" placeholder="123 Main St, City, ST 00000" id="companyAddress"
                        oninput="syncText('companyAddress','companyAddressDisplay','Address, City, ST, ZIP Code');">
-
                 <label>Phone / Fax</label>
                 <input type="text" class="edit-input" placeholder="555-1234 | Fax 555-5678" id="companyPhone"
                        oninput="syncText('companyPhone','companyPhoneDisplay','Phone Number | Fax Number');">
@@ -147,11 +131,9 @@
 
             <div class="edit-section">
                 <p class="edit-section-label">Invoice Details</p>
-
                 <label>Invoice #</label>
                 <input type="text" class="edit-input" placeholder="100" id="invoiceNum"
                        oninput="syncText('invoiceNum','invoiceNumDisplay','100');">
-
                 <label>Invoice Date</label>
                 <input type="date" class="edit-input" id="invoiceDate"
                        oninput="syncDate();">
@@ -159,19 +141,15 @@
 
             <div class="edit-section">
                 <p class="edit-section-label">Customer Info</p>
-
                 <label>Customer Name / Company</label>
                 <input type="text" class="edit-input" placeholder="Name | Company" id="billName"
                        oninput="syncText('billName','billNameDisplay','Name | Company');">
-
                 <label>Customer Address</label>
                 <input type="text" class="edit-input" placeholder="Address, City, ST, ZIP" id="billAddress"
                        oninput="syncText('billAddress','billAddressDisplay','Address, City, ST, ZIP Code');">
-
                 <label>Customer Phone</label>
                 <input type="text" class="edit-input" placeholder="555-0000" id="billPhone"
                        oninput="syncText('billPhone','billPhoneDisplay','Phone');">
-
                 <label>Product / Service Description</label>
                 <input type="text" class="edit-input" placeholder="Product Description" id="forDesc"
                        oninput="syncText('forDesc','forDescDisplay','Product Description');">
@@ -179,7 +157,6 @@
 
             <div class="edit-section">
                 <p class="edit-section-label">Footer Contact</p>
-
                 <label>Contact Info</label>
                 <input type="text" class="edit-input" placeholder="Name, Phone, Email" id="contactInfo"
                        oninput="syncText('contactInfo','contactDisplay','Contact Name, Phone Number, Email');">
@@ -188,9 +165,9 @@
             <button class="btn-print" onclick="printInvoice()">🖨️ Print / Save PDF</button>
             <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
 
-        </div><!-- end .edit-panel -->
+        </div>
 
-    </div><!-- end .invoice-page -->
+    </div>
 
     <div class="page-footer">
         Colonial Spanish Restaurant &nbsp;·&nbsp; Invoice Form &nbsp;·&nbsp; Web Design Assignment — Due May 1, 2026
@@ -201,10 +178,7 @@
 
         window.onload = function () {
             setDefaultDate();
-            addRow();
-            addRow();
-            addRow();
-            addRow();
+            addRow(); addRow(); addRow(); addRow();
         };
 
         function setDefaultDate() {
@@ -237,25 +211,13 @@
             rowCount++;
             var tbody = document.getElementById('itemsBody');
             var isAlt = (tbody.rows.length % 2 === 1);
-
             var tr = document.createElement('tr');
             if (isAlt) tr.classList.add('inv-row-alt');
             tr.id = 'row-' + rowCount;
-
             tr.innerHTML =
-                '<td>' +
-                    '<input type="text" class="inv-input" placeholder="Item description">' +
-                '</td>' +
-                '<td>' +
-                    '<input type="number" class="inv-input amount-input" ' +
-                           'placeholder="0.00" step="0.01" min="0" ' +
-                           'oninput="validateAmount(this); calculateTotals();">' +
-                '</td>' +
-                '<td class="col-del">' +
-                    '<button class="btn-del-row" onclick="deleteRow(' + rowCount + ')" ' +
-                            'title="Remove row">✕</button>' +
-                '</td>';
-
+                '<td><input type="text" class="inv-input" placeholder="Item description"></td>' +
+                '<td><input type="number" class="inv-input amount-input" placeholder="0.00" step="0.01" min="0" oninput="validateAmount(this); calculateTotals();"></td>' +
+                '<td class="col-del"><button class="btn-del-row" onclick="deleteRow(' + rowCount + ')" title="Remove row">✕</button></td>';
             tbody.appendChild(tr);
             restripeRows();
         }
@@ -294,35 +256,24 @@
         function calculateTotals() {
             var amountInputs = document.getElementsByClassName('amount-input');
             var subtotal = 0;
-
             for (var i = 0; i < amountInputs.length; i++) {
                 var val = parseFloat(amountInputs[i].value);
-                if (!isNaN(val) && val > 0) {
-                    subtotal += val;
-                }
+                if (!isNaN(val) && val > 0) subtotal += val;
             }
-
             var taxRate    = parseFloat(document.getElementById('taxRate').value)    || 0;
             var otherCosts = parseFloat(document.getElementById('otherCosts').value) || 0;
-
-            var taxAmount = subtotal * (taxRate / 100);
-            var totalCost = subtotal + taxAmount + otherCosts;
-
+            var taxAmount  = subtotal * (taxRate / 100);
+            var totalCost  = subtotal + taxAmount + otherCosts;
             document.getElementById('subtotalDisplay').textContent  = '$' + subtotal.toFixed(2);
             document.getElementById('taxAmountDisplay').textContent = '$' + taxAmount.toFixed(2);
             document.getElementById('totalDisplay').textContent     = '$' + totalCost.toFixed(2);
         }
 
-        function printInvoice() {
-            window.print();
-        }
+        function printInvoice() { window.print(); }
 
         function clearAll() {
             var inputs = document.querySelectorAll('.edit-input');
-            for (var i = 0; i < inputs.length; i++) {
-                inputs[i].value = '';
-            }
-
+            for (var i = 0; i < inputs.length; i++) inputs[i].value = '';
             document.getElementById('companyNameDisplay').textContent   = 'Company Name';
             document.getElementById('companyAddressDisplay').textContent = 'Address, City, ST, ZIP Code';
             document.getElementById('companyPhoneDisplay').textContent  = 'Phone Number | Fax Number';
@@ -333,21 +284,14 @@
             document.getElementById('forDescDisplay').textContent       = 'Product Description';
             document.getElementById('payableDisplay').textContent       = 'Company Name';
             document.getElementById('contactDisplay').textContent       = 'Contact Name, Phone Number, Email';
-
             document.getElementById('taxRate').value    = '';
             document.getElementById('otherCosts').value = '';
-
             document.getElementById('itemsBody').innerHTML = '';
             rowCount = 0;
-            addRow();
-            addRow();
-            addRow();
-            addRow();
-
+            addRow(); addRow(); addRow(); addRow();
             document.getElementById('subtotalDisplay').textContent  = '$0.00';
             document.getElementById('taxAmountDisplay').textContent = '$0.00';
             document.getElementById('totalDisplay').textContent     = '$0.00';
-
             setDefaultDate();
             clearValidation();
         }
