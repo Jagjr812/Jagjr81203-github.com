@@ -26,14 +26,13 @@
             <li><a href="index.html#contact">Contact</a></li>
             <li><a href="calculator.html">⛽ MPG Calc</a></li>
             <li><a href="invoice.html">🧾 Invoice</a></li>
+            <li><a href="mortgage.html">🏠 Mortgage</a></li>
         </ul>
     </nav>
 
     <div class="invoice-page">
 
-        <!-- ══════════════════════════════
-             LEFT: Live Invoice Document
-        ══════════════════════════════ -->
+        <!-- LEFT: Live Invoice Document -->
         <div class="invoice-doc">
 
             <!-- Header Banner -->
@@ -123,16 +122,12 @@
 
         </div><!-- end .invoice-doc -->
 
-        <!-- ══════════════════════════════
-             RIGHT: Fill-In Panel
-        ══════════════════════════════ -->
+        <!-- RIGHT: Fill-In Panel -->
         <div class="edit-panel">
             <h2 class="edit-title">✏️ Fill Invoice</h2>
 
-            <!-- Validation message -->
             <div class="validation-msg" id="validationMsg"></div>
 
-            <!-- Company Info -->
             <div class="edit-section">
                 <p class="edit-section-label">Company Info</p>
 
@@ -150,7 +145,6 @@
                        oninput="syncText('companyPhone','companyPhoneDisplay','Phone Number | Fax Number');">
             </div>
 
-            <!-- Invoice Details -->
             <div class="edit-section">
                 <p class="edit-section-label">Invoice Details</p>
 
@@ -163,7 +157,6 @@
                        oninput="syncDate();">
             </div>
 
-            <!-- Customer Info -->
             <div class="edit-section">
                 <p class="edit-section-label">Customer Info</p>
 
@@ -184,7 +177,6 @@
                        oninput="syncText('forDesc','forDescDisplay','Product Description');">
             </div>
 
-            <!-- Contact -->
             <div class="edit-section">
                 <p class="edit-section-label">Footer Contact</p>
 
@@ -193,7 +185,6 @@
                        oninput="syncText('contactInfo','contactDisplay','Contact Name, Phone Number, Email');">
             </div>
 
-            <!-- Action Buttons -->
             <button class="btn-print" onclick="printInvoice()">🖨️ Print / Save PDF</button>
             <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
 
@@ -206,51 +197,26 @@
     </div>
 
     <script>
-        /*
-         * ═══════════════════════════════════════════════════
-         *  INVOICE INTERACTIVE FORM  —  JavaScript
-         *
-         *  Features:
-         *   1. Live sync: typing in the panel updates the invoice
-         *   2. Dynamic rows: add / remove item rows
-         *   3. Auto-calculate: subtotal, tax, other costs, total
-         *   4. Validation: amount fields accept numbers only
-         *   5. Default date set to today on page load
-         *   6. Clear All button resets everything
-         *   7. Print hides the panel for a clean PDF
-         *
-         *  Formula:
-         *   subtotal  = sum of all item amounts
-         *   taxAmount = subtotal × (taxRate ÷ 100)
-         *   totalCost = subtotal + taxAmount + otherCosts
-         * ═══════════════════════════════════════════════════
-         */
-
-        // ── Row counter (keeps IDs unique even after deletions) ──
         var rowCount = 0;
 
-        // ── On page load ──────────────────────────────────────
         window.onload = function () {
             setDefaultDate();
-            addRow();   // start with one blank row
-            addRow();   // start with two blank rows
-            addRow();   // start with three blank rows
-            addRow();   // start with four blank rows
+            addRow();
+            addRow();
+            addRow();
+            addRow();
         };
 
-        // ── Set today's date as the default ───────────────────
         function setDefaultDate() {
             var today = new Date();
             var yyyy  = today.getFullYear();
             var mm    = String(today.getMonth() + 1).padStart(2, '0');
             var dd    = String(today.getDate()).padStart(2, '0');
             var formatted = yyyy + '-' + mm + '-' + dd;
-
             document.getElementById('invoiceDate').value = formatted;
             document.getElementById('invoiceDateDisplay').textContent = formatDateDisplay(formatted);
         }
 
-        // ── Format date for display (MM/DD/YYYY) ──────────────
         function formatDateDisplay(val) {
             if (!val) return '—';
             var parts = val.split('-');
@@ -262,13 +228,11 @@
             document.getElementById('invoiceDateDisplay').textContent = formatDateDisplay(val);
         }
 
-        // ── Sync any text field → invoice display ─────────────
         function syncText(inputId, displayId, placeholder) {
             var val = document.getElementById(inputId).value.trim();
             document.getElementById(displayId).textContent = val || placeholder;
         }
 
-        // ── Add a new item row ────────────────────────────────
         function addRow() {
             rowCount++;
             var tbody = document.getElementById('itemsBody');
@@ -296,7 +260,6 @@
             restripeRows();
         }
 
-        // ── Delete a row ──────────────────────────────────────
         function deleteRow(id) {
             var tbody = document.getElementById('itemsBody');
             if (tbody.rows.length <= 1) {
@@ -309,7 +272,6 @@
             calculateTotals();
         }
 
-        // ── Re-apply alternating row colours after add/delete ─
         function restripeRows() {
             var rows = document.getElementById('itemsBody').rows;
             for (var i = 0; i < rows.length; i++) {
@@ -318,7 +280,6 @@
             }
         }
 
-        // ── Validate: only positive numbers in amount fields ──
         function validateAmount(input) {
             var val = parseFloat(input.value);
             if (input.value !== '' && (isNaN(val) || val < 0)) {
@@ -330,10 +291,7 @@
             }
         }
 
-        // ── Calculate subtotal, tax, and total ────────────────
         function calculateTotals() {
-
-            // Step 1: Sum all amount inputs
             var amountInputs = document.getElementsByClassName('amount-input');
             var subtotal = 0;
 
@@ -344,50 +302,41 @@
                 }
             }
 
-            // Step 2: Read tax rate and other costs
             var taxRate    = parseFloat(document.getElementById('taxRate').value)    || 0;
             var otherCosts = parseFloat(document.getElementById('otherCosts').value) || 0;
 
-            // Step 3: Apply formula
             var taxAmount = subtotal * (taxRate / 100);
             var totalCost = subtotal + taxAmount + otherCosts;
 
-            // Step 4: Display results
-            document.getElementById('subtotalDisplay').textContent   = '$' + subtotal.toFixed(2);
-            document.getElementById('taxAmountDisplay').textContent  = '$' + taxAmount.toFixed(2);
-            document.getElementById('totalDisplay').textContent      = '$' + totalCost.toFixed(2);
+            document.getElementById('subtotalDisplay').textContent  = '$' + subtotal.toFixed(2);
+            document.getElementById('taxAmountDisplay').textContent = '$' + taxAmount.toFixed(2);
+            document.getElementById('totalDisplay').textContent     = '$' + totalCost.toFixed(2);
         }
 
-        // ── Print: hides UI chrome so invoice prints cleanly ──
         function printInvoice() {
             window.print();
         }
 
-        // ── Clear everything and reset the form ───────────────
         function clearAll() {
-            // Clear all text inputs in the panel
             var inputs = document.querySelectorAll('.edit-input');
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].value = '';
             }
 
-            // Reset all display spans to placeholders
-            document.getElementById('companyNameDisplay').textContent  = 'Company Name';
+            document.getElementById('companyNameDisplay').textContent   = 'Company Name';
             document.getElementById('companyAddressDisplay').textContent = 'Address, City, ST, ZIP Code';
-            document.getElementById('companyPhoneDisplay').textContent = 'Phone Number | Fax Number';
-            document.getElementById('invoiceNumDisplay').textContent   = '100';
-            document.getElementById('billNameDisplay').textContent     = 'Name | Company';
-            document.getElementById('billAddressDisplay').textContent  = 'Address, City, ST, ZIP Code';
-            document.getElementById('billPhoneDisplay').textContent    = 'Phone';
-            document.getElementById('forDescDisplay').textContent      = 'Product Description';
-            document.getElementById('payableDisplay').textContent      = 'Company Name';
-            document.getElementById('contactDisplay').textContent      = 'Contact Name, Phone Number, Email';
+            document.getElementById('companyPhoneDisplay').textContent  = 'Phone Number | Fax Number';
+            document.getElementById('invoiceNumDisplay').textContent    = '100';
+            document.getElementById('billNameDisplay').textContent      = 'Name | Company';
+            document.getElementById('billAddressDisplay').textContent   = 'Address, City, ST, ZIP Code';
+            document.getElementById('billPhoneDisplay').textContent     = 'Phone';
+            document.getElementById('forDescDisplay').textContent       = 'Product Description';
+            document.getElementById('payableDisplay').textContent       = 'Company Name';
+            document.getElementById('contactDisplay').textContent       = 'Contact Name, Phone Number, Email';
 
-            // Clear tax and other costs
             document.getElementById('taxRate').value    = '';
             document.getElementById('otherCosts').value = '';
 
-            // Clear all item rows and add fresh ones
             document.getElementById('itemsBody').innerHTML = '';
             rowCount = 0;
             addRow();
@@ -395,17 +344,14 @@
             addRow();
             addRow();
 
-            // Reset totals
             document.getElementById('subtotalDisplay').textContent  = '$0.00';
             document.getElementById('taxAmountDisplay').textContent = '$0.00';
             document.getElementById('totalDisplay').textContent     = '$0.00';
 
-            // Re-set today's date
             setDefaultDate();
             clearValidation();
         }
 
-        // ── Validation message helpers ────────────────────────
         function showValidation(msg) {
             var el = document.getElementById('validationMsg');
             el.textContent = msg;
@@ -417,7 +363,6 @@
             el.textContent = '';
             el.style.display = 'none';
         }
-
     </script>
 
 </body>
